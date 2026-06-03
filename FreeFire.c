@@ -185,16 +185,23 @@ void listarItens(const Mochila *mochila) {
     }
 
     printf("\n--- Itens na Mochila ---\n");
+    printf("--------------------------------------------------------------------\n");
+    printf(" Nº | Nome                 | Tipo            | Quantidade\n");
+    printf("--------------------------------------------------------------------\n");
+
     for (int i = 0; i < mochila->quantidade; i++) {
-        printf("%d. Nome: %s | Tipo: %s | Quantidade: %d\n",
+        printf("%3d | %-20s | %-15s | %5d\n",
                i + 1,
                mochila->itens[i].nome,
                mochila->itens[i].tipo,
                mochila->itens[i].quantidade);
+        printf("--------------------------------------------------------------------\n");
     }
 }
 
 // --------------------------------------------------------------
+// NIVEL AVENTUREIRO
+// Busca um item na mochila pelo nome usando busca sequencial.
 // Busca sequencial por um item com base no nome informado.
 // Exibe os dados do item encontrado.
 // --------------------------------------------------------------
@@ -208,7 +215,7 @@ void buscarItem(const Mochila *mochila) {
     for (int i = 0; i < mochila->quantidade; i++) {
         if (strcmp(mochila->itens[i].nome, nome) == 0) {
             printf("Item encontrado!\n");
-            printf("Nome: %s | Tipo: %s | Quantidade: %d\n",
+            printf("Nome: %-20s | Tipo: %-15s | Quantidade: %5d\n",
                    mochila->itens[i].nome,
                    mochila->itens[i].tipo,
                    mochila->itens[i].quantidade);
@@ -227,16 +234,17 @@ void menuMochila() {
     Mochila mochila;
     inicializarMochila(&mochila);
     int opcao;
-    printf("\n=================================================================================\n");
-    printf("        MOCHILA DE SOBREVIVENCIA - CODIGO DA ILHA\n");
-    printf("=================================================================================\n");
 
     do {
+        printf("\n=================================================================================\n");
+        printf("        MOCHILA DE SOBREVIVENCIA - CODIGO DA ILHA\n");
+        printf("=================================================================================\n");
+        printf("Itens na Mochila: %d/%d\n\n", mochila.quantidade, MAX_ITENS);
         printf("\n=== MENU MOCHILA ===\n");
-        printf("1. Cadastrar item\n");
-        printf("2. Remover item\n");
-        printf("3. Listar itens\n");
-        printf("4. Buscar item\n");
+        printf("1. Cadastrar Item (Loot)\n");
+        printf("2. Remover Item\n");
+        printf("3. Listar Itens na Mochila\n");
+        printf("4. Buscar Item por Nome\n");
         printf("0. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
